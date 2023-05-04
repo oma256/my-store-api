@@ -1,9 +1,11 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
+from rest_framework.authtoken.models import Token
 
 from apps.users.managers import UserManager
-from utils.user_phone_number_regex import phone_regex
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -22,6 +24,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+        db_table = 't_users'
 
     def __str__(self):
         return f'{self.email}'
+
+
+@receiver(post_save, sender=User)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
