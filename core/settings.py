@@ -37,7 +37,7 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'apps.users.authentication.ExpiringTokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -91,6 +91,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+TOKEN_EXPIRED_AFTER_SECONDS = int(getenv('TOKEN_EXPIRED_AFTER_SECONDS', 1000))
 
 LANGUAGE_CODE = 'en-us'
 

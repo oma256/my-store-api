@@ -9,10 +9,12 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'first_name', 'last_name', 'email')
 
+
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name', 'email', 'password')
+
 
 class UserAuthSerializer(serializers.Serializer):
     email = EmailField()
