@@ -3,7 +3,7 @@ from django.contrib.auth.base_user import BaseUserManager
 
 class UserManager(BaseUserManager):
     """
-    Custom user model manager where phone number is the unique identifiers
+    Custom user model manager where email is the unique identifiers
     for authentication instead of username.
     """
     use_in_migrations = True

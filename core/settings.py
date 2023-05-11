@@ -1,3 +1,4 @@
+import os
 from os import getenv
 from ast import literal_eval
 from pathlib import Path
@@ -23,6 +24,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'apps.users',
+    'apps.cinemas',
 ]
 
 MIDDLEWARE = [
@@ -94,7 +96,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 TOKEN_EXPIRED_AFTER_SECONDS = int(getenv('TOKEN_EXPIRED_AFTER_SECONDS', 1000))
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -102,6 +104,14 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'templates', 'assets'),
+)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
