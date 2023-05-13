@@ -28,11 +28,13 @@ class Location(models.Model):
 class Cinema(models.Model):
     name = models.CharField(verbose_name='Название', max_length=128)
     logo = models.ImageField(verbose_name='Лого', upload_to=upload_instance)
-    city = models.ForeignKey(to='City',
+    city = models.ForeignKey(verbose_name='Город',
+                             to='City',
                              on_delete=models.SET_NULL,
                              related_name='cinemas',
                              null=True)
-    location = models.ForeignKey(to='Location',
+    location = models.ForeignKey(verbose_name='Локация',
+                                 to='Location',
                                  on_delete=models.SET_NULL,
                                  related_name='cinemas',
                                  null=True)

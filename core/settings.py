@@ -13,6 +13,7 @@ DEBUG = literal_eval(getenv('DJANGO_DEBUG'))
 ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS').split(',')
 
 INSTALLED_APPS = [
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

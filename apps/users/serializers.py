@@ -17,5 +17,5 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
 
 class UserAuthSerializer(serializers.Serializer):
-    email = EmailField()
-    password = CharField(max_length=128)
+    email = EmailField(required=True)
+    password = CharField(max_length=128, required=True)
