@@ -26,6 +26,8 @@ INSTALLED_APPS = [
 
     'apps.users',
     'apps.cinemas',
+    'apps.movies',
+    'apps.seanses',
 ]
 
 MIDDLEWARE = [
