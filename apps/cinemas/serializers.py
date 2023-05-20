@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from apps.cinemas.models import Cinema, City, Location
+from apps.seanses.models import Seanse
 
 
 class CitySerializer(ModelSerializer):
@@ -24,3 +25,10 @@ class CinemaSerializer(ModelSerializer):
     class Meta:
         model = Cinema
         fields = ('id', 'name', 'logo', 'city', 'location')
+
+
+class SeanseSerializer(ModelSerializer):
+    class Meta:
+        model = Seanse
+        fields = ('id', 'movie', 'hall', 'schedule',
+                  'price', 'start_time', 'end_time')

@@ -5,7 +5,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),
-    path('', admin.site.urls),
+    path('admin/', admin.site.urls),
 
     path('api/v1/users/', include('apps.users.urls')),
     path('api/v1/cinemas/', include('apps.cinemas.urls')),

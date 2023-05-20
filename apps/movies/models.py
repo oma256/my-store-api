@@ -6,9 +6,11 @@ from apps.movies.utils import upload_instance
 class Movie(models.Model):
     name = models.CharField(verbose_name='Название', max_length=128)
     description = models.TextField(verbose_name='Описание')
-    trailer = models.URLField(verbose_name='Трейлер')
+    trailer = models.URLField(verbose_name='Трейлер',
+                              blank=True, null=True)
     poster = models.ImageField(verbose_name='Постер',
-                               upload_to=upload_instance)
+                               upload_to=upload_instance,
+                               blank=True, null=True)
 
     class Meta:
         verbose_name = 'Фильм',

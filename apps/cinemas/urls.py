@@ -1,6 +1,7 @@
 from django.urls import path
 
-from apps.cinemas.views import CinemaListAPIView, CinemaDetailAPIView
+from apps.cinemas.views import CinemaListAPIView, CinemaDetailAPIView, \
+    SeanseListAPIView
 
 urlpatterns = [
     path('', CinemaListAPIView.as_view(), name='cinema_list'),

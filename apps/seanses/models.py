@@ -6,7 +6,7 @@ from apps.movies.utils import upload_instance
 
 
 class Schedule(models.Model):
-    date = models.DateTimeField(verbose_name='Дата')
+    date = models.DateField(verbose_name='Дата')
 
     class Meta:
         verbose_name = 'Расписание'
