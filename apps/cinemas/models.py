@@ -69,6 +69,10 @@ class Hall(models.Model):
                              on_delete=models.SET_NULL,
                              null=True)
 
+    @property
+    def seats_count(self):
+        return self.seats.count()
+
     class Meta:
         verbose_name = 'Зал'
         verbose_name_plural = 'Залы'

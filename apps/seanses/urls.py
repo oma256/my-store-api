@@ -1,7 +1,8 @@
 from django.urls import path
 
-from apps.cinemas.views import SeanseListAPIView
+from apps.seanses.views import SeanseListAPIView, ReserveListCreateAPIView
 
 urlpatterns = [
-    path('', SeanseListAPIView.as_view(), name='seanses_list'),
+    path('', SeanseListAPIView.as_view(), name='seanses'),
+    path('<int:seanse_id>/reserves', ReserveListCreateAPIView.as_view(), name='reserves'),
 ]

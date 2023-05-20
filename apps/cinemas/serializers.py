@@ -1,7 +1,7 @@
+from rest_framework.fields import IntegerField
 from rest_framework.serializers import ModelSerializer
 
-from apps.cinemas.models import Cinema, City, Location
-from apps.seanses.models import Seanse
+from apps.cinemas.models import Cinema, City, Location, Hall, HallType, Seat
 
 
 class CitySerializer(ModelSerializer):
@@ -27,8 +27,27 @@ class CinemaSerializer(ModelSerializer):
         fields = ('id', 'name', 'logo', 'city', 'location')
 
 
-class SeanseSerializer(ModelSerializer):
+class HallTypeSerializer(ModelSerializer):
+
     class Meta:
-        model = Seanse
-        fields = ('id', 'movie', 'hall', 'schedule',
-                  'price', 'start_time', 'end_time')
+        model = HallType
+        fields = ('id', 'name')
+
+
+class HallSerializer(ModelSerializer):
+    cinema = CinemaSerializer()
+    type = HallTypeSerializer()
+    seats_count = IntegerField()
+
+    class Meta:
+        model = Hall
+        fields = ('id', 'name', 'description', 'image',
+                  'cinema', 'type', 'seats_count')
+
+
+class SeatSerializer(ModelSerializer):
+    hall = HallSerializer()
+
+    class Meta:
+        model = Seat
+        fields = ('id', 'row', 'number', 'hall')
