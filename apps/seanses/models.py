@@ -1,3 +1,5 @@
+import barcode
+from barcode.writer import ImageWriter
 from django.db import models
 
 from apps.cinemas.models import Hall, Seat
@@ -48,6 +50,14 @@ class Ticket(models.Model):
     class Meta:
         verbose_name = 'Билет'
         verbose_name_plural = 'Билеты'
+
+    def generate_barcode_image(self):
+        barcode_value = self.uuid
+        ean = barcode.get('ean13', barcode_value, writer=ImageWriter())
+        image_path = f'{barcode_value}.png'
+        ean.save(filename=image_path)
+        self.barcode = image_path
+        self.save()
 
     def __str__(self):
         return self.uuid

@@ -78,7 +78,7 @@ class Hall(models.Model):
         verbose_name_plural = 'Залы'
 
     def __str__(self):
-        return self.name
+        return self.description
 
 
 class Seat(models.Model):

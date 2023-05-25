@@ -1,8 +1,13 @@
 from datetime import datetime
+from io import BytesIO
+
+import barcode
+from barcode.writer import ImageWriter
 
 from rest_framework.generics import ListAPIView, ListCreateAPIView
+from rest_framework.response import Response
 
-from apps.seanses.models import Seanse, Reserve
+from apps.seanses.models import Seanse, Reserve, Ticket
 from apps.seanses.serializers import SeanseSerializer, ReserveSerializer
 
 
@@ -27,11 +32,15 @@ class ReserveListCreateAPIView(ListCreateAPIView):
     serializer_class = ReserveSerializer
 
     def get_queryset(self):
-        print()
-
+        print(self.kwargs)
         query = Reserve.objects.filter(
             seanse_id=self.kwargs.get('seanse_id'),
-
         )
 
         return query
+
+    def post(self, *args, **kwargs):
+        ticket = Ticket()
+        ticket.generate_barcode_image()
+
+        return Response(data={'status': 'OK'})
