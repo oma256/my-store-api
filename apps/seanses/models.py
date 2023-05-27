@@ -1,10 +1,8 @@
-import barcode
-from barcode.writer import ImageWriter
 from django.db import models
 
 from apps.cinemas.models import Hall, Seat
 from apps.movies.models import Movie
-from apps.movies.utils import upload_instance
+from apps.seanses.utils import generate_random_number
 
 
 class Schedule(models.Model):
@@ -43,21 +41,17 @@ class Seanse(models.Model):
 
 
 class Ticket(models.Model):
-    uuid = models.UUIDField(verbose_name='Уникальный UUID')
+    uuid = models.CharField(verbose_name='Уникальный ID',
+                            max_length=13,
+                            default=generate_random_number,
+                            editable=False,
+                            unique=True)
     barcode = models.ImageField(verbose_name='Баркод',
-                                upload_to=upload_instance)
+                                upload_to='barcodes/')
 
     class Meta:
         verbose_name = 'Билет'
         verbose_name_plural = 'Билеты'
-
-    def generate_barcode_image(self):
-        barcode_value = self.uuid
-        ean = barcode.get('ean13', barcode_value, writer=ImageWriter())
-        image_path = f'{barcode_value}.png'
-        ean.save(filename=image_path)
-        self.barcode = image_path
-        self.save()
 
     def __str__(self):
         return self.uuid

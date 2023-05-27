@@ -21,7 +21,7 @@ class TicketAdmin(admin.ModelAdmin):
 
     def get_barcode(self, obj):
         return format_html(f'<img src="{obj.barcode.url}" '
-                           f'width="100" height="50" />')
+                           f'width="200" height="120" />')
 
     get_barcode.short_description = 'Баркод'
 
