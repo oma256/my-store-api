@@ -1,0 +1,17 @@
+version: 3.8
+
+services:
+  db:
+    container_name: db_my_store_api
+    image: postgres:15-alpine3.17
+    env_file:
+      - ./envs/.env_db
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/
+
+
+volumes:
+  postgres_data
