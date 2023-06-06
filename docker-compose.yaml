@@ -2,33 +2,33 @@ version: "3.8"
 
 services:
   db:
-    container_name: db_my_store_api
+    container_name: db-my-store-api
     image: postgres:15-alpine3.17
     env_file:
       - ./envs/.database
+    environment:
+      - POSTGRES_DB=db_online_store_api
     restart: always
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
   backend:
-    container_name: my_store_api
+    container_name: my-store-api
     build:
       context: .
       dockerfile: Dockerfile
-    command: start.sh
+    command: ./start.sh
     volumes:
       - .:/app
-      - staticfiles:/opt/video_converter/staticfiles
-      - media:/opt/video_converter/media
+      - staticfiles:/opt/my-store-api/staticfiles
+      - media:/opt/my-store-api/media
     env_file:
       - envs/.env_prod
     ports:
       - "8000:8000"
-    links:
-      - db
     depends_on:
-        - db
+      - db
 
 
 volumes:
